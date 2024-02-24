@@ -14,6 +14,8 @@ fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojso
     data.features.forEach(quake => {
       var magnitude = quake.properties.mag;
       var depth = quake.geometry.coordinates[2];
+      var location = quake.properties.place; // Location information
+      
       var color = depth > 300 ? '#FF5733' :
                   depth > 100  ? '#FFC300' :
                   depth > 50  ? '#DAF7A6' :
@@ -28,7 +30,7 @@ fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojso
           weight: 1,
           fillColor: color,
           fillOpacity: 0.8
-      }).bindPopup("<b>Magnitude:</b> " + magnitude + "<br><b>Depth:</b> " + depth + " km").addTo(map);
+      }).bindPopup("<b>Magnitude:</b> " + magnitude + "<br><b>Depth:</b> " + depth + " km<br><b>Location:</b> " + location).addTo(map);
     });
 
     // Add legend for depth
